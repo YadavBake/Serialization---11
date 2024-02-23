@@ -1,0 +1,30 @@
+import java.io.*;		
+		class Animal 
+		{
+			int i =10;									    			 
+		}																
+		class Dog extends Animal implements Serializable
+		{
+			int j = 20;
+		}
+		
+		class InheritSerializeDemo1
+		{
+			public static void main(String args[])throws Exception
+			{
+				Dog d1 = new Dog();
+				d1.i = 888;
+				d1.j = 999;
+				System.out.println(d1.i+"..."+d1.j); //888...999
+				FileOutputStream fos = new FileOutputStream("abd.ser");
+				ObjectOutputStream oos = new ObjectOutputStream(fos);
+				oos.writeObject(d1);
+				System.out.println("Deserialization started");
+				
+				FileInputStream fis  = new FileInputStream("abd.ser");
+				ObjectInputStream ios = new ObjectInputStream(fis);
+				Dog d2 = (Dog)ios.readObject();
+				
+				System.out.println(d2.i+"..."+d2.j); //10...999
+			}
+		}
